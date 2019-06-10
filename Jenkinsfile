@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     echo "========== Git clone =========="
-                    git branch: 'node-example',
+                    git branch: 'master',
                             url: 'git@github.com:eldada/node-git-to-k8s.git'
 
                     echo "========== Docker build =========="
@@ -99,7 +99,7 @@ pipeline {
                     echo "========== Deploy =========="
                     sh "helm upgrade --install ${helmRelease} --set image.tag=${dockerTag}.${env.BUILD_NUMBER} webinar/demo"
 
-                    echo "========== Test =========="
+                    echo "========== Status =========="
                     sh 'sleep 10'
                     sh "helm status ${helmRelease}"
                 }
